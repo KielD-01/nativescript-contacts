@@ -2,7 +2,7 @@
 	"description": "Contacts",
 	"license": "SEE LICENSE IN <your-license-filename>",
 	"readme": "Contacts test Task",
-	"repository": "<fill-your-repository-here>",
+	"repository": "https://github.com/KielD-01/nativescript-contacts",
 	"nativescript": {
 		"id": "org.nativescript.Contacts",
 		"tns-android": {
