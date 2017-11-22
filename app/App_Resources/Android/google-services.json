@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "230435673652",
+    "firebase_url": "https://contactsnativescript.firebaseio.com",
+    "project_id": "contactsnativescript",
+    "storage_bucket": "contactsnativescript.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230435673652:android:33bcc29857c587d7",
+        "android_client_info": {
+          "package_name": "org.nativescript.Contacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230435673652-fcj75ku8js7b9v3h8lop1og87ka8kchk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-9zAuaJ2C_3X7t7ruHq091SThZLqGyjA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
