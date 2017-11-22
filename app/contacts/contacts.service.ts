@@ -5,28 +5,27 @@ const firebase = require("nativescript-plugin-firebase");
 export class ContactsService {
 
     private collection = 'contacts';
-    protected contacts = [];
+    public contacts = [];
 
     getContacts(field: String, order: String) {
+
+        let contactsCollector = (result) => {
+            if (!result.error) {
+                for (let id in result.value) {
+                    let contact = (<any>Object).assign({id: id}, result.value[id]);
+                    this.contacts.push(contact);
+                }
+            }
+
+            if (result.error) {
+                console.log("Error in Firebase : " + result.error);
+            }
+
+            console.log(JSON.stringify(this.contacts));
+        };
+
         firebase.query(
-            (result) => {
-
-                let contacts = [];
-
-                if (!result.error) {
-                    for (let id in result.value) {
-                        let contact = (<any>Object).assign({id: id}, result.value[id]);
-                        contacts.push(contact);
-                    }
-                }
-
-                if (result.error) {
-                    console.log("Error in Firebase : " + result.error);
-                }
-
-                return this.contacts = contacts;
-
-            },
+            contactsCollector,
             `/${this.collection}`,
             {
                 singleEvent: true,
@@ -37,9 +36,9 @@ export class ContactsService {
             }
         );
 
-        console.log(`Contacts : ${this.contacts}`);
-        return this.contacts;
+        console.log('Contacts List : ' + JSON.stringify(this.contacts));
 
+        return this.contacts;
     }
 
     getContact(id: String) {

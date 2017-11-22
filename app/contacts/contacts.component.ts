@@ -14,14 +14,15 @@ const appSettings = require("application-settings");
 export class ContactsComponent implements OnInit {
 
     contacts = [];
+    service: ContactsService;
     field = 'id';
     order = 'asc';
 
     ngOnInit(): void {
+        this.contacts = this.service.getContacts(this.field, this.order);
     }
 
     constructor(public app: AppComponent, public cService: ContactsService) {
-        this.contacts = cService.getContacts(this.field, this.order);
-        console.log(this.contacts);
+        this.service = cService;
     }
 }
