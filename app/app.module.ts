@@ -25,11 +25,11 @@ import {ContactComponent} from "./contacts/contact.component";
     declarations: [
         AppComponent,
         ContactsComponent,
-        ContactsService,
         ContactComponent
     ],
     providers: [
-        ItemService
+        ItemService,
+        ContactsService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

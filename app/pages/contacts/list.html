@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<ActionBar title="Contacts List" class="action-bar">
+</ActionBar>
 
-</body>
-</html>
+<StackLayout *ngIf="contacts.length > 0">
+    <ListView [items]="contacts" class="list-group">
+        <ng-template let-contact="item">
+            <StackLayout orientation="horizontal" [nsRouterLink]="['/contact', contact.id]" class="list-group-item">
+                <Label [text]="contact.first_name"></Label>
+            </StackLayout>
+        </ng-template>
+    </ListView>
+</StackLayout>
+
+<StackLayout *ngIf="contacts.length === 0" class="no-contacts">
+    <Label text="No Contacts has been created" class="no-contacts"></Label>
+</StackLayout>

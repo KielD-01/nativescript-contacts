@@ -1,23 +1,27 @@
-import {Component} from "@angular/core"
+import {Component, OnInit} from "@angular/core";
 import {ContactsService} from "./contacts.service";
 import {AppComponent} from "../app.component";
 
+const firebase = require("nativescript-plugin-firebase");
+const appSettings = require("application-settings");
+
 @Component({
     selector: 'my-app',
-    template: '../pages/contacts/list.html',
+    templateUrl: './pages/contacts/list.html',
     providers: [ContactsService]
 })
 
-export class ContactsComponent {
+export class ContactsComponent implements OnInit {
 
-    contacts: Array<Object>;
+    contacts = [];
+    field = 'id';
+    order = 'asc';
 
-    constructor (public app: AppComponent, public service : ContactsService) {
-        this.contacts = ContactsComponent.getContacts();
+    ngOnInit(): void {
     }
 
-    static getContacts(){
-        return [];
+    constructor(public app: AppComponent, public cService: ContactsService) {
+        this.contacts = cService.getContacts(this.field, this.order);
+        console.log(this.contacts);
     }
-
 }
