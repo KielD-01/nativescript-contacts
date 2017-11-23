@@ -20,10 +20,10 @@ export class ContactsComponent implements OnInit {
 
     constructor(public app: AppComponent, public cService: ContactsService) {
         this.service = cService;
+        this.contacts = this.service.getContacts(this.field, this.order);
     }
 
     ngOnInit(): void {
-        this.contacts = this.service.getContacts(this.field, this.order);
     }
 
 }
