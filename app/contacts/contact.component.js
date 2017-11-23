@@ -8,16 +8,17 @@ var router_1 = require("@angular/router");
 var dialogs = require("ui/dialogs");
 var firebase = require("nativescript-plugin-firebase");
 var ContactComponent = (function () {
-    function ContactComponent(app, cService, contacts, route, ngRouter) {
+    function ContactComponent(app, cService, contacts, ngRoute, ngRouter) {
         this.app = app;
         this.cService = cService;
         this.contacts = contacts;
-        this.route = route;
+        this.ngRoute = ngRoute;
         this.contact = {};
         this.provided = false;
-        this.id = route.snapshot.params['id'];
+        this.id = ngRoute.snapshot.params['id'];
         this.service = cService;
         this.router = ngRouter;
+        this.route = ngRoute;
     }
     ContactComponent.prototype.ngOnInit = function () {
         this.getContact();
@@ -55,6 +56,16 @@ var ContactComponent = (function () {
                     _this.service.getContacts('id', 'asc');
                     _this.router.navigate(['']);
                 }
+            }
+        });
+    };
+    ContactComponent.prototype.remove = function () {
+        var a = this;
+        dialogs.action("Do You really want to remove " + this.contact['first_name'] + " " + this.contact['last_name'] + "?", "No", ["Yes"]).then(function (result) {
+            console.log("Dialog result: " + result);
+            if (result == "Yes") {
+                firebase.remove("/contacts/" + a.id);
+                a.router.navigate(['']);
             }
         });
     };

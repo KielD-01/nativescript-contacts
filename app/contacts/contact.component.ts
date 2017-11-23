@@ -19,12 +19,14 @@ export class ContactComponent implements OnInit {
     service: ContactsService;
     id: String;
     router: Router;
+    route : ActivatedRoute;
     provided = false;
 
-    constructor(public app: AppComponent, public cService: ContactsService, public contacts: ContactsComponent, private route: ActivatedRoute, ngRouter: Router) {
-        this.id = route.snapshot.params['id'];
+    constructor(public app: AppComponent, public cService: ContactsService, public contacts: ContactsComponent, private ngRoute: ActivatedRoute, ngRouter: Router) {
+        this.id = ngRoute.snapshot.params['id'];
         this.service = cService;
         this.router = ngRouter;
+        this.route = ngRoute;
     }
 
     ngOnInit(): void {
@@ -73,4 +75,18 @@ export class ContactComponent implements OnInit {
             }
         });
     }
+
+    remove() {
+
+        let a = this;
+
+        dialogs.action(`Do You really want to remove ${this.contact['first_name']} ${this.contact['last_name']}?`, "No", ["Yes"]).then(function (result) {
+            console.log("Dialog result: " + result);
+            if (result == "Yes") {
+                firebase.remove(`/contacts/${a.id}`);
+                a.router.navigate(['']);
+            }
+        });
+    }
+
 }

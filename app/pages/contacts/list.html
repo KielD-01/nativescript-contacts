@@ -21,5 +21,12 @@
 </StackLayout>
 
 <StackLayout *ngIf="contacts.length === 0" class="no-contacts">
-    <Label text="No Contacts has been created" class="no-contacts"></Label>
+    <StackLayout>
+        <Label text="No Contacts has been created" class="no-contacts"></Label>
+    </StackLayout>
+
+    <StackLayout>
+        <Button [nsRouterLink]="['/contacts/add']" text="Add Contact" class="btn btn-rounded-sm"></Button>
+    </StackLayout>
+
 </StackLayout>

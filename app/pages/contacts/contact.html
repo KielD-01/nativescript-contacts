@@ -2,8 +2,7 @@
     <ActionBar.titleView title="{{ contact.first_name + ' ' + contact.last_name }}">
         <StackLayout orientation="horizontal" ios.position="right">
             <Button text="Edit" class="btn btn-rounded-sm" [nsRouterLink]="['/contact/edit', contact.id]"></Button>
-            <Button text="Delete" class="btn btn-rounded-sm c-ruby"
-                    [nsRouterLink]="['/contact/delete', contact.id]"></Button>
+            <Button text="Delete" class="btn btn-rounded-sm c-ruby" (tap)="remove()"></Button>
         </StackLayout>
     </ActionBar.titleView>
 </ActionBar>
