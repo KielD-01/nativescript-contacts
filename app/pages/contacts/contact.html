@@ -1,2 +1,25 @@
-<ActionBar [title]="contact.first_name + ' ' + contact.last_name" class="action-bar">
+<ActionBar title="{{ contact.first_name + ' ' + contact.last_name }}" *ngIf="provided" class="action-bar">
+    <ActionBar.titleView title="{{ contact.first_name + ' ' + contact.last_name }}">
+        <StackLayout orientation="horizontal" ios.position="right">
+            <Button text="Edit" class="btn btn-rounded-sm" [nsRouterLink]="['/contacts/edit', contact.id]"></Button>
+            <Button text="Delete" class="btn btn-rounded-sm c-ruby"
+                    [nsRouterLink]="['/contacts/delete', contact.id]"></Button>
+        </StackLayout>
+    </ActionBar.titleView>
 </ActionBar>
+
+<StackLayout *ngIf="!provided">
+    <Label text="No Contact Info has been provided" class="contacts-count"></Label>
+</StackLayout>
+
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <GridLayout columns="100, auto, *" rows="50, auto, *" class="contact-info h-full">
+        <Label row="0" col="0" text="First Name"></Label>
+        <Label row="0" col="1" class="pull-right c-black" [text]="contact.first_name"></Label>
+        <Label row="1" col="0" text="Last Name"></Label>
+        <Label row="1" col="1" class="pull-right c-black" [text]="contact.last_name"></Label>
+        <Label row="2" col="0" text="Phone"></Label>
+        <Label row="2" col="1" class="pull-right c-black" [text]="contact.phone"></Label>
+    </GridLayout>
+
+</Page>

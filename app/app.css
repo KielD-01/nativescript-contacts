@@ -21,3 +21,18 @@ StackLayout {
     margin : 8;
     width : 100%;
 }
+
+Label.contacts-count {
+    margin : 4 auto;
+    width : 100%;
+    text-align: center;
+}
+
+GridLayout.contact-info {
+    padding : 4;
+}
+
+GridLayout.contact-info Label {
+    margin : 12;
+    text-align: right;
+}

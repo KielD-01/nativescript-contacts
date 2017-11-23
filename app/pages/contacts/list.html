@@ -2,10 +2,19 @@
 </ActionBar>
 
 <StackLayout *ngIf="contacts.length > 0">
+
+    <StackLayout>
+        <Label [text]="'You have ' + contacts.length + ' contact(-s)'" class="contacts-count"></Label>
+    </StackLayout>
+
+    <StackLayout>
+        <Button [nsRouterLink]="['/contacts/add']" text="Add Contact" class="btn btn-rounded-sm"></Button>
+    </StackLayout>
+
     <ListView [items]="contacts" class="list-group">
         <ng-template let-contact="item">
             <StackLayout orientation="horizontal" [nsRouterLink]="['/contact', contact.id]" class="list-group-item">
-                <Label [text]="contact.first_name"></Label>
+                <Label [text]="contact.first_name + ' ' + contact.last_name + ' (' + contact.phone + ') '"></Label>
             </StackLayout>
         </ng-template>
     </ListView>

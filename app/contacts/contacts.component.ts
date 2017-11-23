@@ -18,11 +18,12 @@ export class ContactsComponent implements OnInit {
     field = 'id';
     order = 'asc';
 
+    constructor(public app: AppComponent, public cService: ContactsService) {
+        this.service = cService;
+    }
+
     ngOnInit(): void {
         this.contacts = this.service.getContacts(this.field, this.order);
     }
 
-    constructor(public app: AppComponent, public cService: ContactsService) {
-        this.service = cService;
-    }
 }

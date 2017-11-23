@@ -5,10 +5,10 @@ const firebase = require("nativescript-plugin-firebase");
 export class ContactsService {
 
     private collection = 'contacts';
-    public contacts = [];
+    private contacts = [];
+    private contact = {};
 
     getContacts(field: String, order: String) {
-
         let contactsCollector = (result) => {
             if (!result.error) {
                 for (let id in result.value) {
@@ -20,12 +20,11 @@ export class ContactsService {
             if (result.error) {
                 console.log("Error in Firebase : " + result.error);
             }
-
-            console.log(JSON.stringify(this.contacts));
         };
 
         firebase.query(
-            contactsCollector,
+            () => {
+            },
             `/${this.collection}`,
             {
                 singleEvent: true,
@@ -34,15 +33,42 @@ export class ContactsService {
                     value: field
                 }
             }
-        );
-
-        console.log('Contacts List : ' + JSON.stringify(this.contacts));
+        )
+            .then((results) => {
+                contactsCollector(results);
+            });
 
         return this.contacts;
     }
 
     getContact(id: String) {
+        console.log(`Receiving Information about ID of '${id}'`);
 
+        let contactPopulator = (contacts) => {
+            if (!contacts.error) {
+                this.contact = (<any>Object).assign({id: contacts.key}, contacts.value);
+            }
+        };
+
+        firebase.query(
+            contactPopulator,
+            `/${this.collection}/${id}`,
+            {
+                singleEvent: true,
+                orderBy: {
+                    type: firebase.QueryOrderByType.VALUE,
+                    value: 'first_name'
+                }
+            }
+        ).then(results => {
+            if (!results.error) {
+                this.contact = (<any>Object).assign({id: results.key}, results.value);
+            }
+
+            return this.contact;
+        });
+
+        return this.contact;
     }
 
     createContact(contact: Object) {
