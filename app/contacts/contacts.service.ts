@@ -8,7 +8,7 @@ export class ContactsService {
     private contacts = [];
     private contact = {};
 
-    getContacts(field: String, order: String) {
+    getContacts() {
         let contactsCollector = (result) => {
             if (!result.error) {
                 for (let id in result.value) {
@@ -29,8 +29,7 @@ export class ContactsService {
             {
                 singleEvent: true,
                 orderBy: {
-                    type: firebase.QueryOrderByType.CHILD,
-                    value: field
+                    type: firebase.QueryOrderByType.KEY
                 }
             }
         )

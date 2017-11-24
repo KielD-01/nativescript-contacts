@@ -8,7 +8,7 @@ var ContactsService = (function () {
         this.contacts = [];
         this.contact = {};
     }
-    ContactsService.prototype.getContacts = function (field, order) {
+    ContactsService.prototype.getContacts = function () {
         var _this = this;
         var contactsCollector = function (result) {
             if (!result.error) {
@@ -25,8 +25,7 @@ var ContactsService = (function () {
         }, "/" + this.collection, {
             singleEvent: true,
             orderBy: {
-                type: firebase.QueryOrderByType.CHILD,
-                value: field
+                type: firebase.QueryOrderByType.KEY
             }
         })
             .then(function (results) {

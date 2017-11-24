@@ -8,7 +8,8 @@
     </StackLayout>
 
     <StackLayout style.margin="8 0 16 0">
-        <Button [nsRouterLink]="['/contacts/add']" text="Add Contact" class="btn btn-rounded-sm" style.padding="2" style.margin="-12"></Button>
+        <Button [nsRouterLink]="['/contacts/add']" text="Add Contact" class="btn btn-rounded-sm" style.padding="2"
+                style.margin="-12"></Button>
     </StackLayout>
 
     <WrapLayout orientation="horizontal" class="w-full" height="auto">
@@ -27,7 +28,7 @@
     <ListView [items]="contacts" class="list-group">
         <ng-template let-contact="item">
             <StackLayout orientation="horizontal" [nsRouterLink]="['/contact', contact.id]" class="list-group-item">
-                <Label [text]="contact.first_name + ' ' + contact.last_name + ' (' + contact.phone + ') '"></Label>
+                <Label [text]="contact.first_name + ' ' + contact.last_name"></Label>
             </StackLayout>
         </ng-template>
     </ListView>

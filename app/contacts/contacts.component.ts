@@ -14,7 +14,7 @@ const appSettings = require("application-settings");
     providers: [ContactsService]
 })
 
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit{
 
     contacts = [];
     service: ContactsService;
@@ -31,69 +31,47 @@ export class ContactsComponent implements OnInit {
         desc: 'Descending',
     };
 
+    sortingTypes = {
+        asc : (a,b,field) =>{
+            if (a['field'] < b['field']) return -1;
+            if (a['field'] > b['field']) return 1;
+
+            return 0;
+        },
+        desc : (a,b,field) =>{
+            if (b['field'] < a['field']) return -1;
+            if (b['field'] > a['field']) return 1;
+
+            return 0;
+        }
+    };
+
     sorting = {
         first_name: {
             asc: (x, y) => {
-                let a = x['first_name'].toLowerCase(),
-                    b = y['first_name'].toLowerCase();
-
-                if (a < b) return -1;
-                if (a > b) return 1;
-
-                return 0;
+                return this.sortingTypes.asc(x,y, 'first_name');
             },
             desc: (x, y) => {
-                let a = x['first_name'].toLowerCase(),
-                    b = y['first_name'].toLowerCase();
-
-                if (b < a) return -1;
-                if (b > a) return 1;
-
-                return 0;
+                return this.sortingTypes.desc(x,y, 'first_name');
             }
         },
         last_name: {
             asc: (x, y) => {
-                let a = x['last_name'].toLowerCase(),
-                    b = y['last_name'].toLowerCase();
-
-                if (a < b) return -1;
-                if (a > b) return 1;
-
-                return 0;
+                return this.sortingTypes.asc(x,y, 'last_name');
             },
             desc: (x, y) => {
-                let a = x['last_name'].toLowerCase(),
-                    b = y['last_name'].toLowerCase();
-
-                if (b < a) return -1;
-                if (b > a) return 1;
-
-                return 0;
+                return this.sortingTypes.desc(x,y, 'last_name');
             }
         },
         phone: {
             asc: (x, y) => {
-                let a = x['phone'].toLowerCase(),
-                    b = y['phone'].toLowerCase();
-
-                if (a < b) return -1;
-                if (a > b) return 1;
-
-                return 0;
+                return this.sortingTypes.asc(x, y, 'phone');
             },
             desc: (x, y) => {
-                let a = x['phone'].toLowerCase(),
-                    b = y['phone'].toLowerCase();
-
-                if (b < a) return -1;
-                if (b > a) return 1;
-
-                return 0;
+                return this.sortingTypes.desc(x, y, 'phone');
             }
-        },
+        }
     };
-
 
     constructor(public app: AppComponent, public cService: ContactsService) {
         this.service = cService;
@@ -101,11 +79,11 @@ export class ContactsComponent implements OnInit {
             field: 'first_name',
             type: 'asc'
         };
-        this.contacts = this.service.getContacts(this.orderBy.field, this.orderBy.type);
+        this.contacts = (this.service.getContacts());
     }
 
-    ngOnInit(): void {
-       this.reOrder();
+    ngOnInit() {
+        this.contacts.sort(this.sorting.first_name.asc);
     }
 
     reOrder() {
