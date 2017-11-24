@@ -19,7 +19,7 @@ export class ContactComponent implements OnInit {
     service: ContactsService;
     id: String;
     router: Router;
-    route : ActivatedRoute;
+    route: ActivatedRoute;
     provided = false;
 
     constructor(public app: AppComponent, public cService: ContactsService, public contacts: ContactsComponent, private ngRoute: ActivatedRoute, ngRouter: Router) {
@@ -55,22 +55,25 @@ export class ContactComponent implements OnInit {
 
     update(field, field_title) {
 
+        let component = this;
+
         dialogs.prompt({
             title: `Updating ${this.contact['first_name']} ${this.contact['last_name']}`,
             message: `Type new value for '${field_title}' field`,
             okButtonText: "Submit",
             cancelButtonText: "Cancel",
             inputType: dialogs.inputType.text,
-            defaultText: this.contact[field]
+            defaultText: component.contact[field]
         }).then(r => {
-
             if (r.result == true) {
                 if (r.text.length > 0) {
-                    firebase.update(`/contacts/${this.id}/${field}`, r.text);
+                    component.contact[field] = r.text;
 
-                    this.getContact();
-                    this.service.getContacts('id', 'asc');
-                    this.router.navigate(['']);
+                    component.service.updateContact(this.id, this.contact);
+                    component.getContact();
+
+                    component.service.getContacts('id', 'asc');
+                    return component.router.navigate(['']);
                 }
             }
         });
@@ -80,11 +83,10 @@ export class ContactComponent implements OnInit {
 
         let a = this;
 
-        dialogs.action(`Do You really want to remove ${this.contact['first_name']} ${this.contact['last_name']}?`, "No", ["Yes"]).then(function (result) {
-            console.log("Dialog result: " + result);
+        dialogs.action(`Do You really want to remove ${this.contact['first_name']} ${this.contact['last_name']}?`, '', ["Yes", "No"]).then(function (result) {
             if (result == "Yes") {
-                firebase.remove(`/contacts/${a.id}`);
-                a.router.navigate(['']);
+                a.service.deleteContact(a.id);
+                return a.router.navigate(['']);
             }
         });
     }

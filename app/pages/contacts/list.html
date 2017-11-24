@@ -7,9 +7,22 @@
         <Label [text]="'You have ' + contacts.length + ' contact(-s)'" class="contacts-count"></Label>
     </StackLayout>
 
-    <StackLayout>
-        <Button [nsRouterLink]="['/contacts/add']" text="Add Contact" class="btn btn-rounded-sm"></Button>
+    <StackLayout style.margin="8 0 16 0">
+        <Button [nsRouterLink]="['/contacts/add']" text="Add Contact" class="btn btn-rounded-sm" style.padding="2" style.margin="-12"></Button>
     </StackLayout>
+
+    <WrapLayout orientation="horizontal" class="w-full" height="auto">
+        <WrapLayout orientation="horizontal" style.width="50%" height="auto">
+            <Label text="Order By" style.margin="0 10 4 16" class="pull-left"></Label>
+            <Label [text]="fields[orderBy.field]" (tap)="selectOrderField()"
+                   class="font-weight-bold m-b-5 pull-left"></Label>
+        </WrapLayout>
+        <WrapLayout orientation="horizontal" style.width="50%" height="auto">
+            <Label text="Sorting" class="pull-right"></Label>
+            <Label [text]="types[orderBy.type]" style.margin="0 10 4 16" (tap)="selectOrderTypeField()"
+                   class="font-weight-bold m-b-5 pull-right w-100"></Label>
+        </WrapLayout>
+    </WrapLayout>
 
     <ListView [items]="contacts" class="list-group">
         <ng-template let-contact="item">
