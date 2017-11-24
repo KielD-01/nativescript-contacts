@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<ActionBar [title]="'Edit ' + contact.first_name + ' ' + contact.last_name" class="action-bar">
+</ActionBar>
 
-</body>
-</html>
+<GridLayout>
+    <ScrollView>
+        <StackLayout margin="10" verticalAlignment="center">
+            <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+                <StackLayout class="input-field">
+                    <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="contact.first_name"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Last Name" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="contact.last_name"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Phone" class="label font-weight-bold m-b-5"></Label>
+                    <TextField keyboardType="number" class="input" [(ngModel)]="contact.phone"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <Button class="btn btn-primary w-full" text="Update Contact" (tap)="update()"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

@@ -1,2 +1,27 @@
 <ActionBar title="Create New Contact" class="action-bar">
 </ActionBar>
+
+<GridLayout style="margin : 4">
+    <ScrollView>
+        <StackLayout margin="10" verticalAlignment="center">
+            <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+                <StackLayout class="input-field">
+                    <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="contact.first_name" index="0"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Last Name" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="contact.last_name" index="1"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Phone" class="label font-weight-bold m-b-5"></Label>
+                    <TextField keyboardType="number" class="input" [(ngModel)]="contact.phone" index="2"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <Button class="btn btn-primary w-full" text="Create Contact" (tap)="save(contact)"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

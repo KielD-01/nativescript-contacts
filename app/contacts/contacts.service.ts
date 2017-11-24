@@ -72,14 +72,15 @@ export class ContactsService {
     }
 
     createContact(contact: Object) {
+        firebase.push(`/${this.collection}`, contact);
     }
 
     updateContact(id: String, contact: Object) {
-
+        firebase.update(`/${this.collection}/${id}`, contact);
     }
 
     deleteContact(id: String) {
-
+        firebase.remove(`/${this.collection}/${id}`);
     }
 
 }

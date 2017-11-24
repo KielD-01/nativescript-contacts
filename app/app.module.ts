@@ -3,13 +3,12 @@ import {NativeScriptModule} from "nativescript-angular/nativescript.module";
 import {AppRoutingModule} from "./app.routing";
 import {AppComponent} from "./app.component";
 
-import {ItemService} from "./item/item.service";
 import {ContactsComponent} from "./contacts/contacts.component";
 import {ContactsService} from "./contacts/contacts.service";
 import {ContactComponent} from "./contacts/contact.component";
 import {AddContactComponent} from "./contacts/contact.add.component";
 import {EditContactComponent} from "./contacts/contact.edit.component";
-import {DeleteContactComponent} from "./contacts/contact.delete.component";
+import {NativeScriptFormsModule} from "nativescript-angular";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -23,7 +22,8 @@ import {DeleteContactComponent} from "./contacts/contact.delete.component";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NativeScriptFormsModule
     ],
     declarations: [
         AppComponent,
@@ -31,10 +31,8 @@ import {DeleteContactComponent} from "./contacts/contact.delete.component";
         ContactComponent,
         AddContactComponent,
         EditContactComponent,
-        DeleteContactComponent,
     ],
     providers: [
-        ItemService,
         ContactsService
     ],
     schemas: [

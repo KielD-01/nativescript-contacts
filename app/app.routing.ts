@@ -5,19 +5,18 @@ import {ContactsComponent} from "./contacts/contacts.component";
 import {ContactComponent} from "./contacts/contact.component";
 import {AddContactComponent} from "./contacts/contact.add.component";
 import {EditContactComponent} from "./contacts/contact.edit.component";
-import {DeleteContactComponent} from "./contacts/contact.delete.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/contacts", pathMatch: "full" },
-    { path: "contacts", component: ContactsComponent},
-    { path: "contact/:id", component: ContactComponent},
-    { path: "contacts/add", component: AddContactComponent},
-    { path: "contact/edit/:id", component: EditContactComponent},
-    { path: "contact/delete/:id", component: DeleteContactComponent},
+    {path: "", redirectTo: "/contacts", pathMatch: "full"},
+    {path: "contacts", component: ContactsComponent},
+    {path: "contact/:id", component: ContactComponent},
+    {path: "contacts/add", component: AddContactComponent},
+    {path: "contact/edit/:id", component: EditContactComponent},
 ];
 
 @NgModule({
     imports: [NativeScriptRouterModule.forRoot(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
